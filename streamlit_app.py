@@ -35,7 +35,6 @@ if b_download:
 @st.cache()
 def create_network():
     n = pypsa.Network()
-    st.text(n)
     
     n.add('Bus', 'bus')
     for i in range(10):
@@ -60,7 +59,8 @@ if menu == 'Generators':
         st.button('Submit')
     
 elif menu == 'Download':
-    st.download_button('Download Network', data=n)
+    pass
+    #st.download_button('Download Network', data=n)
 
 
 
