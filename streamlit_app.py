@@ -17,20 +17,30 @@ n = pypsa.Network()
 st.text(n)
 
 with st.sidebar:
-    menu = st.button('Generators')
-    menu = st.button('Lines')
-    menu = st.button('bla')
-    menu = st.button('Download Network')
+    b_gen = st.button('Generators')
+    b_lines = st.button('Lines')
+    b_bla = st.button('bla')
+    b_download = st.button('Download Network')
 
-if not menu:
+menu = 'Download'
+if b_gen:
     menu = 'Generators'
+if b_lines:
+    menu = 'Lines'
+if b_bla:
+    menu = 'Bla'
+if b_download:
+    menu = 'Download'
+
 
 
 n.add('Bus', 'bus')
 for i in range(10):
     n.add('Generator', bus='bus', name='my_gen_'+str(i), p_nom = np.random.rand()*200+50, p_min_pu=np.random.rand()*0.5, p_max_pu = 1-np.random.rand()*0.1, carrier=['wind', 'PV', 'hydro', 'gas', 'coal'][np.random.randint(0,5)])
 
-st.text(menu)
+
+st.text('#This is Menu '+menu)
+
 if menu == 'Generators':
     st.dataframe(n.generators)
     selected_gen = st.selectbox('Select generator to change', n.generators.index.tolist())
