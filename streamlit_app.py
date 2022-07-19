@@ -27,12 +27,13 @@ with st.sidebar:
     menu = st.button('bla')
     menu = st.button('Download Network')
 
-if menu is None:
+if not menu:
     menu = 'Generators'
 
 
+n.add('Bus', 'bus')
 for i in range(10):
-    n.add('Generator', name='my_gen_'+str(i), p_nom = np.random.rand()*200+50, p_min_pu=np.random.rand()*0.5, p_max_pu = 1-np.random.rand()*0.1, carrier=['wind', 'PV', 'hydro', 'gas', 'coal'][np.random.randint(0,5)])
+    n.add('Generator', bus='bus', name='my_gen_'+str(i), p_nom = np.random.rand()*200+50, p_min_pu=np.random.rand()*0.5, p_max_pu = 1-np.random.rand()*0.1, carrier=['wind', 'PV', 'hydro', 'gas', 'coal'][np.random.randint(0,5)])
 
 st.text(menu)
 if menu == 'Generators':
