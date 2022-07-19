@@ -21,10 +21,11 @@ In the meantime, below is an example of what you can do with just a few lines of
 n = pypsa.Network()
 st.text(n)
 
-menu = st.sidebar(st.button('Generators'))
-menu = st.sidebar(st.button('Lines'))
-menu = st.sidebar(st.button('bla'))
-menu = st.sidebar(st.button('Download Network'))
+with st.sidebar:
+    menu = st.button('Generators')
+    menu = st.button('Lines')
+    menu = st.button('bla')
+    menu = st.button('Download Network')
 
 if menu is None:
     menu = 'Generators'
