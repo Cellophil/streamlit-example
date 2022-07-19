@@ -13,8 +13,7 @@ Edit your network below!
 """
 
 
-n = pypsa.Network()
-st.text(n)
+
 
 with st.sidebar:
     b_gen = st.button('Generators')
@@ -22,7 +21,8 @@ with st.sidebar:
     b_bla = st.button('bla')
     b_download = st.button('Download Network')
 
-menu = 'Download'
+if 'menu' not in globals():
+    menu = 'Download'
 if b_gen:
     menu = 'Generators'
 if b_lines:
@@ -32,11 +32,17 @@ if b_bla:
 if b_download:
     menu = 'Download'
 
+@st.cache()
+def create_network():
+    n = pypsa.Network()
+    st.text(n)
+    
+    n.add('Bus', 'bus')
+    for i in range(10):
+        n.add('Generator', bus='bus', name='my_gen_'+str(i), p_nom = np.random.rand()*200+50, p_min_pu=np.random.rand()*0.5, p_max_pu = 1-np.random.rand()*0.1, carrier=['wind', 'PV', 'hydro', 'gas', 'coal'][np.random.randint(0,5)])
+    return n
 
-
-n.add('Bus', 'bus')
-for i in range(10):
-    n.add('Generator', bus='bus', name='my_gen_'+str(i), p_nom = np.random.rand()*200+50, p_min_pu=np.random.rand()*0.5, p_max_pu = 1-np.random.rand()*0.1, carrier=['wind', 'PV', 'hydro', 'gas', 'coal'][np.random.randint(0,5)])
+n = create_network(n)
 
 
 st.text('#This is Menu '+menu)
@@ -53,7 +59,8 @@ if menu == 'Generators':
 
         st.button('Submit')
     
-        
+elif menu == 'Download':
+    st.download_button('Download Network', data=n)
 
 
 
