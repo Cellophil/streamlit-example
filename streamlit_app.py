@@ -42,7 +42,7 @@ def create_network():
         n.add('Generator', bus='bus', name='my_gen_'+str(i), p_nom = np.random.rand()*200+50, p_min_pu=np.random.rand()*0.5, p_max_pu = 1-np.random.rand()*0.1, carrier=['wind', 'PV', 'hydro', 'gas', 'coal'][np.random.randint(0,5)])
     return n
 
-n = create_network(n)
+n = create_network()
 
 
 st.text('#This is Menu '+menu)
