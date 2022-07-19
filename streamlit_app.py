@@ -38,7 +38,7 @@ for i in range(10):
 st.text(menu)
 if menu == 'Generators':
     st.dataframe(n.generators)
-    selected_gen = st.selectbox('Select generator to change', n.geneartors.index.tolist())
+    selected_gen = st.selectbox('Select generator to change', n.generators.index.tolist())
 
     if selected_gen is not None:
         gen = n.generators.loc[selected_gen, :]
